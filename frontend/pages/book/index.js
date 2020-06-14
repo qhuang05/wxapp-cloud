@@ -18,8 +18,8 @@ Page({
           data: {
             isbn: res.result
           },
-          success(bookRes) {
-            console.log(bookRes);
+          success(resBook) {
+            console.log('book', resBook);
           }
         })
       }

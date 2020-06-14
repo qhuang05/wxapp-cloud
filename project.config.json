@@ -1,6 +1,6 @@
 {
-  "miniprogramRoot": "frontend/",
-  "cloudfunctionRoot": "clouded/",
+	"miniprogramRoot": "frontend/",
+	"cloudfunctionRoot": "clouded/",
 	"description": "项目配置文件",
 	"packOptions": {
 		"ignore": []
@@ -26,6 +26,7 @@
 	"isGameTourist": false,
 	"simulatorType": "wechat",
 	"simulatorPluginLibVersion": {},
+	"cloudfunctionTemplateRoot": "cloudfunctionTemplate",
 	"condition": {
 		"search": {
 			"current": -1,
