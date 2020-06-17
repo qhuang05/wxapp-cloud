@@ -5,24 +5,26 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+      bookInfo: ''
   },
 
   // 通过扫描二维码添加图书
   scanBook() {
+    let self = this;
     wx.scanCode({
-      success(res) {
-        console.log('isbn码: ', res.result);
-        wx.cloud.callFunction({
-          name: 'book',
-          data: {
-            isbn: res.result
-          },
-          success(resBook) {
-            console.log('book', resBook);
-          }
-        })
-      }
+        success(res) {
+            console.log('isbn码: ', res.result);
+            wx.cloud.callFunction({
+                name: 'book',
+                data: {
+                    isbn: res.result
+                },
+                success(resBook) {
+                    console.log('book', resBook);
+                    self.setData({ bookInfo: JSON.stringify(resBook.result.bookInfo) });
+                }
+            })
+        }
     })
   },
 

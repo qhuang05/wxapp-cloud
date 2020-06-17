@@ -1,3 +1,4 @@
 <view>
     <button type="primary" bindtap="scanBook">扫描图书二维码</button>
+    {{bookInfo}}
 </view>
