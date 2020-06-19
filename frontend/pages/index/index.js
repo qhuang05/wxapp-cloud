@@ -4,7 +4,9 @@ Page({
    * 页面的初始数据
    */
   data: {
-    sum: 0
+    sum: 0,
+    wxOpenid: '',
+    wxAppid: ''
   },
 
   /**
@@ -13,12 +15,25 @@ Page({
   onLoad: function (options) {
     let self = this;
     wx.cloud.callFunction({
-      name: 'sum',
-      data: { a: 10, b:20 }
+        name: 'sum',
+        data: { a: 10, b:20 }
     }).then(res => {
-      self.setData({sum: res.result.sum});
+        self.setData({
+          'sum': res.result.sum
+        });
     }).catch(err => {
-      console.log('error', err);
+        console.log('error', err);
+    })
+
+    wx.cloud.callFunction({
+        name: 'login',
+        success(res){
+            // console.log('login', res);
+            self.setData({
+                'wxOpenid': res.result.openid,
+                'wxAppid': res.result.appid
+            })
+        }
     })
   },
 

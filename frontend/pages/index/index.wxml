@@ -1,3 +1,8 @@
 <view>
-  云函数测试： 10 + 20 = {{sum}}
+    云函数测试： 10 + 20 = {{sum}}
+</view>
+<view>
+    登录测试：
+    <view>wxOpenid: {{wxOpenid}}</view>
+    <view>wxAppid: {{wxAppid}}</view>
 </view>
