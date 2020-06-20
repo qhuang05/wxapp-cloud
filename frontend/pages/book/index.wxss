@@ -1,0 +1,7 @@
+.user-info{
+    text-align: center;
+}
+.user-avatar{
+    width: 120rpx;
+    height: 120rpx;
+}

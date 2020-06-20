@@ -1,4 +1,17 @@
 <view>
-    <button type="primary" bindtap="scanBook">扫描图书二维码</button>
-    {{bookInfo}}
+    <view class="user-info">
+        <view wx:if="{{userInfo.openid}}">
+            <image src="{{userInfo.avatarUrl}}" class="user-avatar"></image>
+        </view>
+        <view wx:else>
+            <button type="primary" size="mini" open-type="getUserInfo" bindgetuserinfo="onGetUserInfo">登录</button>
+        </view>
+    </view>
+    
+    <view class="book-info">
+        <button type="primary" bindtap="scanBook">扫描图书二维码</button>
+    </view>
+    <view class="scan-book-list">
+        <view wx:for="{{bookList}}" wx:key="index">{{item}}</view>
+    </view>
 </view>

@@ -1,11 +1,12 @@
-// pages/book/index.js
+const db = wx.cloud.database();
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-      bookInfo: ''
+      userInfo: wx.getStorageSync('userinfo') || {},
+      bookList: []
   },
 
   // 通过扫描二维码添加图书
@@ -14,18 +15,62 @@ Page({
     wx.scanCode({
         success(res) {
             console.log('isbn码: ', res.result);
+            wx.showLoading();
             wx.cloud.callFunction({
                 name: 'book',
-                data: {
-                    isbn: res.result
-                },
+                data: { isbn: res.result },
                 success(resBook) {
-                    console.log('book', resBook);
-                    self.setData({ bookInfo: JSON.stringify(resBook.result.bookInfo) });
+                    wx.hideLoading();
+                    console.log('bookinfo', resBook);
+                    self.addBook(resBook.result);
                 }
             })
         }
     })
+  },
+
+  // 添加图书到云数据库
+  addBook(book) {
+      let self = this;
+      db.collection('books').add({
+          data: book,
+          success(res){
+              console.log('addBook', res);
+              if(res._id){
+                  wx.showModal({
+                      title: '添加成功',
+                      content: `图书《${book.title}》添加成功`,
+                  });
+                //   self.setData({
+                //       bookList: [...self.data.bookList, book.title]
+                //   });
+                  let len = self.data.bookList.length;
+                  self.setData({
+                      [`bookList[${len}]`]: book.title
+                  });
+              }
+          }
+      })
+  },
+
+  // 登录
+  onGetUserInfo(e){
+      let userInfo = e.detail.userInfo;
+      wx.cloud.callFunction({
+          name: 'login',
+          success: (res) => {
+              let {openid, appid, unionid} = res.result;
+              userInfo = Object.assign({}, userInfo, {
+                  openid,
+                  appid,
+                  unionid
+              });
+              wx.setStorageSync('userinfo', userInfo);
+              this.setData({
+                  'userInfo': userInfo
+              });
+          }
+      });
   },
 
   /**
