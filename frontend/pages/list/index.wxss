@@ -1,0 +1,13 @@
+.books-container{
+  padding: 0 20rpx;
+}
+.book-item{
+  margin-bottom: 20rpx;
+}
+.book-item .title{
+  font-weight: bold;
+  font-size: 32rpx;
+}
+.book-item image{
+  width: 400rpx;
+}

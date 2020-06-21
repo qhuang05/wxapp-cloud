@@ -1,0 +1,8 @@
+<view class="books-container">
+  <view wx:for="{{list}}" wx:key="_id" class="book-item">
+    <view class="title">{{item.title}}</view>
+    <view>扫描时间：{{item.create_time}}</view>
+    <image src="{{item.image}}"></image>
+    <view>简介：{{item.summary}}</view>
+  </view>
+</view>

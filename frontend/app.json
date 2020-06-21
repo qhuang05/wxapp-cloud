@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/list/index",
     "pages/book/index",
     "pages/index/index"
   ],
